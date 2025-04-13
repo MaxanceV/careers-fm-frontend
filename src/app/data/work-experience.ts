@@ -1,9 +1,9 @@
 export interface WorkExperience {
     id: string;                
-    application_id: string;    
+    applicationId: string;    
     title: string;
     description?: string;
-    start_date?: Date;       
-    end_date?: Date;          
+    startDate?: Date;       
+    endDate?: Date;          
   }
   

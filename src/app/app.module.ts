@@ -3,32 +3,31 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TopBarComponent } from './top-bar/top-bar.component';
-import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { TopBarComponent } from './components/top-bar/top-bar.component';
+import { provideHttpClient } from '@angular/common/http';
+import { ApplicationService } from './services/application.service';
+import { JobService } from './services/job.service';
 import { JobListComponent } from './components/job-list/job-list.component';
-import { JobListItemComponent } from './components/job-list-item/job-list-item.component';
-import { JobDetailComponent } from './components/job-detail/job-detail.component';
-import { ApplyFormComponent } from './components/apply-form/apply-form.component';
-import { ApplicationListComponent } from './components/application-list/application-list.component';
-import { ApplicationListItemComponent } from './components/application-list-item/application-list-item.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopBarComponent,
-    SearchBarComponent,
     JobListComponent,
-    JobListItemComponent,
-    JobDetailComponent,
-    ApplyFormComponent,
-    ApplicationListComponent,
-    ApplicationListItemComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CommonModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    provideHttpClient(),
+    ApplicationService,
+    JobService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

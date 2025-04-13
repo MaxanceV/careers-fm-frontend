@@ -1,6 +1,6 @@
 export interface Skill {
     id: string;              
-    application_id: string;    
+    applicationId: string;    
     name: string;
   }
   
