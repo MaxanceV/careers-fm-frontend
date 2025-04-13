@@ -10,12 +10,14 @@ import { JobService } from './services/job.service';
 import { JobListComponent } from './components/job-list/job-list.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { JobListItemComponent } from './components/job-list-item/job-list-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopBarComponent,
     JobListComponent,
+    JobListItemComponent
   ],
   imports: [
     BrowserModule,
