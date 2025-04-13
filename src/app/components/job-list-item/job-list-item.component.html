@@ -1,25 +1,27 @@
-<div class="card mb-3 shadow-sm" *ngIf="job">
-    <div class="card-header d-flex justify-content-between align-items-center">
-      <h4 class="mb-0">{{ job.title }}</h4>
-      <span class="badge rounded-pill bg-primary">{{ job.company }}</span>
-    </div>
-    <div class="card-body">
-      <p class="card-text">{{ job.description }}</p>
-      <div class="row">
-        <div class="col-md-6">
-          <p><strong>Location:</strong> {{ job.location }}</p>
-          <p><strong>Type:</strong> {{ job.type }}</p>
-          <p><strong>Remote:</strong> {{ job.remote ? 'Yes' : 'No' }}</p>
-        </div>
-        <div class="col-md-6">
-          <p><strong>Salary Min:</strong> {{ job.salaryMin | currency:'USD':'symbol':'1.0-0' }}</p>
-          <p><strong>Salary Max:</strong> {{ job.salaryMax | currency:'USD':'symbol':'1.0-0' }}</p>
-          <p><strong>Experience:</strong> {{ job.experienceLevel }}</p>
-        </div>
+<div class="card mb-2 shadow-sm" *ngIf="job" style="cursor: pointer;" (click)="goToJobDetail(job)">
+    <div class="card-body p-2">
+      <!-- Première ligne : Titre et badge entreprise -->
+      <div class="d-flex justify-content-between align-items-center">
+        <h5 class="mb-0 text-dark">{{ job.title }}</h5>
+        <span class="badge rounded-pill bg-primary">{{ job.company }}</span>
+      </div>
+      <!-- Deuxième ligne : Localisation -->
+      <div class="mt-1">
+        <p class="mb-0 text-muted" style="font-size: 0.9rem;">{{ job.location }}</p>
+      </div>
+      <!-- Troisième ligne : Statut Remote -->
+      <div class="mt-1">
+        <p class="mb-0 text-muted" style="font-size: 0.8rem;">
+          {{ job.remote ? 'Remote' : 'On-Site' }}
+        </p>
       </div>
     </div>
-    <div class="card-footer text-muted text-end">
-      Posted on: {{ job.createdDate | date:'mediumDate' }}
+    <!-- Footer : Date de publication et bouton de détails -->
+    <div class="card-footer p-2 d-flex justify-content-between align-items-center">
+      <small class="text-muted">{{ job.createdDate | date:'mediumDate' }}</small>
+      <button class="btn btn-sm btn-outline-primary" (click)="goToJobDetail(job); $event.stopPropagation();">
+        View Details
+      </button>
     </div>
   </div>
   

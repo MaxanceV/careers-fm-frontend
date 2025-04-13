@@ -1,6 +1,3 @@
-export type JobType = 'full_time' | 'part_time' | 'freelance' | 'internship' | 'contract';
-export type ExperienceLevel = 'junior' | 'mid' | 'senior' | 'lead';
-
 export interface Job {
   id: string;        
   title: string;
@@ -8,10 +5,10 @@ export interface Job {
   location?: string;      
   remote: boolean;
   company: string;
-  type: JobType;
+  type: string;
   salaryMin?: number;
   salaryMax?: number;
-  experienceLevel: ExperienceLevel;
+  experienceLevel: string;
   createdDate?: Date;         
 }
 
@@ -23,10 +20,10 @@ export const FAKE_JOBS: Job[] = [
       location: 'Paris',
       remote: true,
       company: 'Tech Innovators Inc.',
-      type: 'full_time' as JobType,
+      type: 'full_time',
       salaryMin: 70000,
       salaryMax: 90000,
-      experienceLevel: 'senior' as ExperienceLevel,
+      experienceLevel: 'senior',
       createdDate: new Date('2024-01-15')
     },
     {
@@ -36,10 +33,10 @@ export const FAKE_JOBS: Job[] = [
       location: 'Lyon',
       remote: false,
       company: 'StartUp Hub',
-      type: 'internship' as JobType,
+      type: 'internship',
       salaryMin: 30000,
       salaryMax: 40000,
-      experienceLevel: 'junior' as ExperienceLevel,
+      experienceLevel: 'junior',
       createdDate: new Date('2024-02-01')
     },
     {
@@ -49,10 +46,10 @@ export const FAKE_JOBS: Job[] = [
       location: 'Remote',
       remote: true,
       company: 'Creative Studio',
-      type: 'freelance' as JobType,
+      type: 'freelance',
       salaryMin: 40000,
       salaryMax: 50000,
-      experienceLevel: 'mid' as ExperienceLevel,
+      experienceLevel: 'mid',
       createdDate: new Date('2024-03-10')
     },
     {
@@ -62,10 +59,10 @@ export const FAKE_JOBS: Job[] = [
       location: 'Bordeaux',
       remote: false,
       company: 'Enterprise Solutions',
-      type: 'full_time' as JobType,
+      type: 'full_time',
       salaryMin: 50000,
       salaryMax: 75000,
-      experienceLevel: 'senior' as ExperienceLevel,
+      experienceLevel: 'senior',
       createdDate: new Date('2024-02-20')
     },
     {
@@ -75,10 +72,10 @@ export const FAKE_JOBS: Job[] = [
       location: 'Marseille',
       remote: true,
       company: 'Digital Creatives Ltd.',
-      type: 'part_time' as JobType,
+      type: 'part_time',
       salaryMin: 35000,
       salaryMax: 45000,
-      experienceLevel: 'mid' as ExperienceLevel,
+      experienceLevel: 'mid',
       createdDate: new Date('2024-03-05')
     }
   ];

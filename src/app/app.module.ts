@@ -11,13 +11,15 @@ import { JobListComponent } from './components/job-list/job-list.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { JobListItemComponent } from './components/job-list-item/job-list-item.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopBarComponent,
     JobListComponent,
-    JobListItemComponent
+    JobListItemComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,

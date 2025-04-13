@@ -10,6 +10,7 @@ import { JobService } from '../../services/job.service';
 })
 export class JobListComponent implements OnInit {
   jobs: Job[] = [];
+  allJobs: Job[] = [];
   constructor(private jobService: JobService) { }
   
   ngOnInit(): void {
@@ -19,8 +20,18 @@ export class JobListComponent implements OnInit {
   loadJobs(): void {
     this.jobService.getJobs().subscribe((jobs) => {
       this.jobs = jobs;
+      this.allJobs = jobs;
     });
   }
 
+  onSearch(searchTerm: string): void {
+    if (!searchTerm || searchTerm.trim() === '') {
+      this.jobs = this.allJobs; // Aucun filtre appliqué
+    } else {
+      this.jobs = this.allJobs.filter(job =>
+        job.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+  }
 
 }

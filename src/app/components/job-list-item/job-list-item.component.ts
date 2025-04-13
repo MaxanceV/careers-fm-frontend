@@ -10,4 +10,9 @@ import { Job } from '../../data/job';
 export class JobListItemComponent {
   @Input()
   job!: Job;
+
+  goToJobDetail(job: any): void {
+    // Navigate to the job detail page or handle the job detail logic
+    console.log('Navigating to job detail for:', job);
+  }
 }
