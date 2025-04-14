@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { JobListItemComponent } from './components/job-list-item/job-list-item.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { JobDetailComponent } from './components/job-detail/job-detail.component';
 
 @NgModule({
   declarations: [
@@ -19,13 +20,14 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     TopBarComponent,
     JobListComponent,
     JobListItemComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    JobDetailComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CommonModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     provideHttpClient(),

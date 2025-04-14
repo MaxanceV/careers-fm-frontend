@@ -1,1 +1,24 @@
-<p>job-detail works!</p>
+<div class="container my-4" *ngIf="job; else loading">
+  <h2 class="mb-3">{{ job.title }}</h2>
+  <span class="badge rounded-pill bg-primary">{{ job.company }}</span>
+  <hr />
+  <p class="text-muted">
+    {{ job.location }} - {{ job.remote ? "Remote" : "On-Site" }}
+  </p>
+  <p><strong>Type:</strong> {{ job.type }}</p>
+  <p>
+    <strong>Salary Range:</strong>
+    {{ job.salaryMin | currency : "USD" : "symbol" : "1.0-0" }} -
+    {{ job.salaryMax | currency : "USD" : "symbol" : "1.0-0" }}
+  </p>
+  <p><strong>Experience Level:</strong> {{ job.experienceLevel }}</p>
+  <p><strong>Posted on:</strong> {{ job.createdDate | date : "mediumDate" }}</p>
+  <p><strong>Description:</strong></p>
+  <p>{{ job.description }}</p>
+  <!-- Bouton pour revenir à la liste -->
+  <button class="btn btn-secondary mt-3" (click)="back()">Back</button>
+</div>
+
+<ng-template #loading>
+  <p>Loading job details...</p>
+</ng-template>

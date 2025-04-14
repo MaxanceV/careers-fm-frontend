@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Job } from '../../data/job';
 
 @Component({
@@ -11,8 +12,9 @@ export class JobListItemComponent {
   @Input()
   job!: Job;
 
+  constructor(private router: Router) {}
+
   goToJobDetail(job: any): void {
-    // Navigate to the job detail page or handle the job detail logic
-    console.log('Navigating to job detail for:', job);
+    this.router.navigate(['/jobs', job.id]);
   }
 }
