@@ -1,0 +1,10 @@
+.card {
+    position: sticky;
+    top: 1rem;
+  }
+  
+  select,
+  input {
+    font-size: 0.9rem;
+  }
+  

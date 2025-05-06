@@ -6,13 +6,17 @@ import { JobService } from '../../services/job.service';
   selector: 'app-job-list',
   standalone: false,
   templateUrl: './job-list.component.html',
-  styleUrl: './job-list.component.css'
+  styleUrls: ['./job-list.component.css']
 })
 export class JobListComponent implements OnInit {
   jobs: Job[] = [];
   allJobs: Job[] = [];
-  constructor(private jobService: JobService) { }
-  
+
+  private currentSearchTerm: string = '';
+  private currentFilters: any = {};
+
+  constructor(private jobService: JobService) {}
+
   ngOnInit(): void {
     this.loadJobs();
   }
@@ -25,13 +29,24 @@ export class JobListComponent implements OnInit {
   }
 
   onSearch(searchTerm: string): void {
-    if (!searchTerm || searchTerm.trim() === '') {
-      this.jobs = this.allJobs; // Aucun filtre appliqué
-    } else {
-      this.jobs = this.allJobs.filter(job =>
-        job.title.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
+    this.currentSearchTerm = searchTerm;
+    this.applyCombinedFilters();
   }
 
+  applyFilters(filters: any): void {
+    this.currentFilters = filters;
+    this.applyCombinedFilters();
+  }
+
+  private applyCombinedFilters(): void {
+    this.jobs = this.allJobs.filter((job) => {
+      const matchTitle = !this.currentSearchTerm || job.title.toLowerCase().includes(this.currentSearchTerm.toLowerCase());
+      const matchSalary = !this.currentFilters.salaryMin || (job.salaryMin ?? 0) >= this.currentFilters.salaryMin;
+      const matchRemote = this.currentFilters.remote === null || job.remote === this.currentFilters.remote;
+      const matchType = !this.currentFilters.type || job.type === this.currentFilters.type;
+      const matchExperience = !this.currentFilters.experienceLevel || job.experienceLevel === this.currentFilters.experienceLevel;
+
+      return matchTitle && matchSalary && matchRemote && matchType && matchExperience;
+    });
+  }
 }

@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { JobListItemComponent } from './components/job-list-item/job-list-item.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { JobDetailComponent } from './components/job-detail/job-detail.component';
+import { AdvancedFilterComponent } from './components/advanced-filter/advanced-filter.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { JobDetailComponent } from './components/job-detail/job-detail.component
     JobListComponent,
     JobListItemComponent,
     SearchBarComponent,
-    JobDetailComponent
+    JobDetailComponent,
+    AdvancedFilterComponent
   ],
   imports: [
     BrowserModule,
