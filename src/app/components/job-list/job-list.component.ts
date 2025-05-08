@@ -23,10 +23,24 @@ export class JobListComponent implements OnInit {
 
   loadJobs(): void {
     this.jobService.getJobs().subscribe((jobs) => {
-      this.jobs = jobs;
-      this.allJobs = jobs;
+      this.allJobs = jobs.map(job => {
+        let createdAt: Date;
+  
+        if (Array.isArray(job.createdAt)) {
+          // On vérifie que c'est bien un tableau de 3 à 5 nombres (ex: [2024, 2, 1, 0, 0])
+          const [y, m, d, h = 0, min = 0] = job.createdAt;
+          createdAt = new Date(y, m - 1, d, h, min);
+        } else {
+          createdAt = new Date(job.createdAt ?? '');
+        }
+  
+        return { ...job, createdAt };
+      });
+  
+      this.jobs = [...this.allJobs];
     });
   }
+  
 
   onSearch(searchTerm: string): void {
     this.currentSearchTerm = searchTerm;

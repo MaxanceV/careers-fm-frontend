@@ -27,6 +27,7 @@ export class JobDetailComponent implements OnInit {
         error: (err) => console.error('Error fetching job details', err)
       });
     }
+    
   }
 
   // Méthode pour revenir en arrière

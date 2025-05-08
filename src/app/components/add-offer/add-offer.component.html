@@ -1,0 +1,75 @@
+<div class="container my-4">
+    <h2 class="mb-4">Create New Job Offer</h2>
+  
+    <form [formGroup]="form" (ngSubmit)="submit()">
+  
+      <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input class="form-control" formControlName="title"/>
+        <small class="text-danger" *ngIf="ctrl('title')?.invalid && ctrl('title')?.touched">
+          5–100 characters required
+        </small>
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Company</label>
+        <input class="form-control" formControlName="company"/>
+        <small class="text-danger" *ngIf="ctrl('company')?.invalid && ctrl('company')?.touched">
+          Min 3 characters
+        </small>
+      </div>
+  
+      <!-- Rich text description -->
+      <div class="mb-3">
+        <label class="form-label">Description</label> <br>
+        <quill-editor
+          formControlName="description"
+          [style]="{height:'200px'}">
+        </quill-editor>
+        <small class="text-danger" *ngIf="ctrl('description')?.invalid && ctrl('description')?.touched">
+          50–3000 characters
+        </small>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Salary Min</label>
+          <input type="number" class="form-control" formControlName="salaryMin"/>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Salary Max</label>
+          <input type="number" class="form-control" formControlName="salaryMax"/>
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Location</label>
+        <input class="form-control" formControlName="location"/>
+      </div>
+  
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" formControlName="remote" id="remoteChk">
+        <label class="form-check-label" for="remoteChk">Remote allowed</label>
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Experience level</label>
+        <select class="form-select" formControlName="experienceLevel">
+          <option value="" disabled>Select level</option>
+          <option *ngFor="let l of levels" [value]="l">{{ l | titlecase }}</option>
+        </select>
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Contract type</label>
+        <select class="form-select" formControlName="type">
+          <option value="" disabled>Select type</option>
+          <option *ngFor="let t of types" [value]="t">{{ t | titlecase }}</option>
+        </select>
+      </div>
+  
+      <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Create</button>
+      <a routerLink="/jobs" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+  </div>
+  

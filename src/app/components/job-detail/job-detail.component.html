@@ -12,9 +12,14 @@
     {{ job.salaryMax | currency : "USD" : "symbol" : "1.0-0" }}
   </p>
   <p><strong>Experience Level:</strong> {{ job.experienceLevel }}</p>
-  <p><strong>Posted on:</strong> {{ job.createdDate | date : "mediumDate" }}</p>
-  <p><strong>Description:</strong></p>
-  <p>{{ job.description }}</p>
+  <p><strong>Posted on:</strong> {{ job.createdAt | date : "mediumDate" }}</p>
+  <div class="description-box mt-3">
+    <div class="description-header">
+      <i class="bi bi-file-earmark-text-fill me-2"></i> Job Description
+    </div>
+    <div class="description-content" [innerHTML]="job.description | safeHtml"></div>
+  </div>
+
   <!-- Bouton pour revenir à la liste -->
   <button class="btn btn-secondary mt-3" (click)="back()">Back</button>
 </div>

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { FAKE_JOBS, Job } from '../data/job';
+import { Job } from '../data/job';
 
 @Injectable()
 export class JobService {
@@ -15,6 +15,10 @@ export class JobService {
 
   getJobById(id: string): Observable<Job> {
     return this.http.get<Job>(`${this.apiUrl}/${id}`);
+  }
+
+  createJob(body: Partial<Job>): Observable<Job> {
+    return this.http.post<Job>(this.apiUrl, body);
   }
   
 }

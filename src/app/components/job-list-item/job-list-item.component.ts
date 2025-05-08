@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Job } from '../../data/job';
 
@@ -8,9 +8,14 @@ import { Job } from '../../data/job';
   templateUrl: './job-list-item.component.html',
   styleUrl: './job-list-item.component.css'
 })
-export class JobListItemComponent {
+export class JobListItemComponent implements OnInit {
   @Input()
   job!: Job;
+
+  ngOnInit(): void {
+    console.log('job.createdAt:', this.job.createdAt);
+  }
+  
 
   constructor(private router: Router) {}
 

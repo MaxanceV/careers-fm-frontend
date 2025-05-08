@@ -18,7 +18,7 @@
     </div>
     <!-- Footer : Date de publication et bouton de détails -->
     <div class="card-footer p-2 d-flex justify-content-between align-items-center">
-      <small class="text-muted">{{ job.createdDate | date:'mediumDate' }}</small>
+      <small class="text-muted">{{ job.createdAt | date:'mediumDate' }}</small>
       <button class="btn btn-sm btn-outline-primary" (click)="goToJobDetail(job); $event.stopPropagation();">
         View Details
       </button>
