@@ -19,6 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { QuillModule } from 'ngx-quill';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
+import { ApplicationListComponent } from './components/application-list/application-list.component';
+import { ApplicationListItemComponent } from './components/application-list-item/application-list-item.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
     TopBarComponent,
     JobListComponent,
     JobListItemComponent,
+    ApplicationListComponent,
+    ApplicationListItemComponent,
     SearchBarComponent,
     JobDetailComponent,
     AdvancedFilterComponent,

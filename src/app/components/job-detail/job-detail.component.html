@@ -17,12 +17,34 @@
     <div class="description-header">
       <i class="bi bi-file-earmark-text-fill me-2"></i> Job Description
     </div>
-    <div class="description-content" [innerHTML]="job.description | safeHtml"></div>
+    <div
+      class="description-content"
+      [innerHTML]="job.description | safeHtml"
+    ></div>
   </div>
 
   <!-- Bouton pour revenir à la liste -->
   <button class="btn btn-secondary mt-3" (click)="back()">Back</button>
 </div>
+<!-- Apply Button -->
+<a class="btn btn-success mt-3 me-2" [routerLink]="['/apply', job.id]">
+  <i class="bi bi-send-fill me-1"></i> Apply to this offer
+</a>
+
+<!-- Toggle for applications -->
+<button class="btn btn-outline-primary mt-3" (click)="showApplications = !showApplications">
+  {{ showApplications ? 'Hide' : 'Show' }} applications ({{ applications.length }})
+</button>
+<div *ngIf="showApplications" class="mt-3">
+  <h5 class="mb-3">
+    <i class="bi bi-people-fill me-2"></i> Applications
+  </h5>
+  <app-application-list [apps]="applications"></app-application-list>
+</div>
+
+<!-- Spacer -->
+<div style="height: 80px;"></div>
+
 
 <ng-template #loading>
   <p>Loading job details...</p>

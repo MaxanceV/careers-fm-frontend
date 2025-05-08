@@ -1,1 +1,8 @@
-<p>application-list works!</p>
+<div *ngIf="apps?.length; else none">
+    <app-application-list-item *ngFor="let app of apps" [app]="app"></app-application-list-item>
+  </div>
+  
+  <ng-template #none>
+    <div class="text-muted fst-italic mt-2">No applications yet.</div>
+  </ng-template>
+  

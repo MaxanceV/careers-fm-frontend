@@ -1,1 +1,38 @@
-<p>application-list-item works!</p>
+<div class="card mb-3 shadow-sm">
+    <div class="card-header d-flex justify-content-between align-items-center" (click)="toggle()" style="cursor: pointer;">
+      <div>
+        <strong>{{ app.firstName }} {{ app.lastName }}</strong><br>
+        <small class="text-muted">{{ app.email }}</small>
+      </div>
+      <div class="d-flex align-items-center">
+        <small class="text-muted me-2">{{ app.createdAt | date:'short' }}</small>
+        <i class="bi" [ngClass]="expanded ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+      </div>
+    </div>
+  
+    <div *ngIf="expanded" class="card-body bg-light">
+      <p class="mb-1" *ngIf="app.phone">
+        <i class="bi bi-telephone me-1 text-secondary"></i>{{ app.phone }}
+      </p>
+  
+      <div *ngIf="app.skills?.length">
+        <strong>Skills:</strong>
+        <span class="badge bg-primary ms-1 mb-1" *ngFor="let s of app.skills">{{ s.name }}</span>
+      </div>
+  
+      <div *ngIf="app.workExperiences?.length" class="mt-2">
+        <strong>Experience:</strong>
+        <ul class="mb-0 ps-3">
+          <li *ngFor="let w of app.workExperiences">
+            <span class="fw-semibold">{{ w.title }}</span>
+            <span *ngIf="w.startDate">
+              – {{ w.startDate | date:'yyyy-MM' }}
+              <ng-container *ngIf="w.endDate"> → {{ w.endDate | date:'yyyy-MM' }}</ng-container>
+            </span>
+            <div class="text-muted small" *ngIf="w.description">{{ w.description }}</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
