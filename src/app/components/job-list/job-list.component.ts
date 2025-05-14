@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Job } from '../../data/job';
 import { JobService } from '../../services/job.service';
+import { Subject, debounceTime, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-job-list',
@@ -10,57 +11,60 @@ import { JobService } from '../../services/job.service';
 })
 export class JobListComponent implements OnInit {
   jobs: Job[] = [];
-  allJobs: Job[] = [];
-
-  private currentSearchTerm: string = '';
-  private currentFilters: any = {};
+  
+  private filterSubject = new Subject<void>();
+  private searchTerm: string = '';
+  private advancedFilters: any = {
+    salaryMin: null,
+    remote: null,
+    type: '',
+    experienceLevel: ''
+  };
 
   constructor(private jobService: JobService) {}
 
   ngOnInit(): void {
-    this.loadJobs();
-  }
+  this.filterSubject.pipe(
+    debounceTime(300),
+    switchMap(() => {
+      const filters = {
+        keyword: this.searchTerm,
+        salaryMin: this.advancedFilters.salaryMin, 
+        remote: this.advancedFilters.remote,
+        type: this.advancedFilters.type,
+        experienceLevel: this.advancedFilters.experienceLevel 
+      };
+      console.log('Filters sent to service:', filters); 
+      return this.jobService.getJobsWithFilters(filters);
+    })
+  ).subscribe(jobs => {
+    this.jobs = jobs.map(job => {
+      let createdAt: Date;
+
+      if (Array.isArray(job.createdAt)) {
+        const [y, m, d, h = 0, min = 0] = job.createdAt;
+        createdAt = new Date(y, m - 1, d, h, min);
+      } else {
+        createdAt = new Date(job.createdAt ?? '');
+      }
+
+      return { ...job, createdAt };
+    });
+  });
+  this.loadJobs();
+}
 
   loadJobs(): void {
-    this.jobService.getJobs().subscribe((jobs) => {
-      this.allJobs = jobs.map(job => {
-        let createdAt: Date;
-  
-        if (Array.isArray(job.createdAt)) {
-          // On vérifie que c'est bien un tableau de 3 à 5 nombres (ex: [2024, 2, 1, 0, 0])
-          const [y, m, d, h = 0, min = 0] = job.createdAt;
-          createdAt = new Date(y, m - 1, d, h, min);
-        } else {
-          createdAt = new Date(job.createdAt ?? '');
-        }
-  
-        return { ...job, createdAt };
-      });
-  
-      this.jobs = [...this.allJobs];
-    });
+    this.filterSubject.next();
   }
-  
 
   onSearch(searchTerm: string): void {
-    this.currentSearchTerm = searchTerm;
-    this.applyCombinedFilters();
+    this.searchTerm = searchTerm;
+    this.filterSubject.next();
   }
 
   applyFilters(filters: any): void {
-    this.currentFilters = filters;
-    this.applyCombinedFilters();
-  }
-
-  private applyCombinedFilters(): void {
-    this.jobs = this.allJobs.filter((job) => {
-      const matchTitle = !this.currentSearchTerm || job.title.toLowerCase().includes(this.currentSearchTerm.toLowerCase());
-      const matchSalary = !this.currentFilters.salaryMin || (job.salaryMin ?? 0) >= this.currentFilters.salaryMin;
-      const matchRemote = this.currentFilters.remote === null || job.remote === this.currentFilters.remote;
-      const matchType = !this.currentFilters.type || job.type === this.currentFilters.type;
-      const matchExperience = !this.currentFilters.experienceLevel || job.experienceLevel === this.currentFilters.experienceLevel;
-
-      return matchTitle && matchSalary && matchRemote && matchType && matchExperience;
-    });
+    this.advancedFilters = filters;
+    this.filterSubject.next();
   }
 }
