@@ -21,6 +21,7 @@ import { QuillModule } from 'ngx-quill';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { ApplicationListComponent } from './components/application-list/application-list.component';
 import { ApplicationListItemComponent } from './components/application-list-item/application-list-item.component';
+import { ApplyFormComponent } from './components/apply-form/apply-form.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ApplicationListItemComponent } from './components/application-list-item
     SearchBarComponent,
     JobDetailComponent,
     AdvancedFilterComponent,
-    AddOfferComponent
+    AddOfferComponent,
+    ApplyFormComponent
   ],
   imports: [
     BrowserModule,

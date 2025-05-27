@@ -13,5 +13,11 @@ export class ApplicationService {
   getApplicationsByJobId(jobId: string): Observable<Application[]> {
     return this.http.get<Application[]>(`${this.apiUrl}/job/${jobId}`);
   }
+
+  createApplication(body: Partial<Application>): Observable<Application>{
+    return this.http.post<Application>(`${this.apiUrl}`, body);
+  }
+
+
 }
 
