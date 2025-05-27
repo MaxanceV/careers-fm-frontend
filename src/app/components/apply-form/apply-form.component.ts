@@ -54,7 +54,7 @@ export class ApplyFormComponent implements OnInit {
           email    : ['', [ Validators.required, Validators.email ]],
           phone    : ['', [
             Validators.required,
-            Validators.pattern(/^[0-9+\-\s]{5,15}$/)
+            Validators.pattern(/^[0-9+\-\s]{5,20}$/)
           ]],
     
           // at least one skill, each ≥2 chars
