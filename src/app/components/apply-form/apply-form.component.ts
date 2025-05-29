@@ -1,4 +1,3 @@
-// components/apply-form/apply-form.component.ts
 import { Component, OnInit }        from '@angular/core';
 import { ActivatedRoute, Router }   from '@angular/router';
 import {
@@ -57,17 +56,16 @@ export class ApplyFormComponent implements OnInit {
             Validators.pattern(/^[0-9+\-\s]{5,20}$/)
           ]],
     
-          // at least one skill, each ≥2 chars
+          // at least one skill, each >2 chars
           skills   : this.fb.array([
             this.fb.control('', [Validators.required, Validators.minLength(2)])
           ]),
     
-          // experiences (optional) – validator on the group
+          // experiences are optional
           workExperiences: this.fb.array([])
         });
       }
 
-  // Add / remove helpers
   addSkill() {
     this.skills.push(
       this.fb.control('', [Validators.required, Validators.minLength(2)])
@@ -82,7 +80,7 @@ export class ApplyFormComponent implements OnInit {
         description: [''],
         startDate  : ['', Validators.required],
         endDate    : ['']
-      }, { validators: dateRange })             //  ← custom validator
+      }, { validators: dateRange })           
     );
   }
   removeExperience(i: number) { this.experiences.removeAt(i); }

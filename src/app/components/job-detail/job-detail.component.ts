@@ -13,7 +13,7 @@ import { ApplicationService } from '../../services/application.service';
   styleUrl: './job-detail.component.css'
 })
 export class JobDetailComponent implements OnInit {
-  job!: Job;  // La variable qui stockera l'offre
+  job!: Job;  
   applications: Application[] = [];
   showApplications = false;
   
@@ -44,7 +44,7 @@ export class JobDetailComponent implements OnInit {
     });
   }
 
-  // Méthode pour revenir en arrière
+
   back(): void {
     this.location.back();
   }

@@ -1,13 +1,11 @@
 <div class="card p-3 shadow-sm">
     <h5 class="mb-3">Advanced Filters</h5>
   
-    <!-- Salary Min -->
     <div class="mb-3">
       <label for="salaryMin" class="form-label">Min Salary</label>
       <input type="number" class="form-control" id="salaryMin" [(ngModel)]="filters.salaryMin" (input)="onChange()" />
     </div>
   
-    <!-- Remote toggle -->
     <div class="mb-3">
       <label class="form-label">Remote</label>
       <select class="form-select" [(ngModel)]="filters.remote" (change)="onChange()">
@@ -16,8 +14,7 @@
         <option [ngValue]="false">On-Site</option>
       </select>
     </div>
-  
-    <!-- Type of contract -->
+
     <div class="mb-3">
       <label class="form-label">Contract Type</label>
       <select class="form-select" [(ngModel)]="filters.type" (change)="onChange()">
@@ -25,8 +22,7 @@
         <option *ngFor="let t of types" [value]="t">{{ t | titlecase }}</option>
       </select>
     </div>
-  
-    <!-- Experience Level -->
+
     <div class="mb-3">
       <label class="form-label">Experience Level</label>
       <select class="form-select" [(ngModel)]="filters.experienceLevel" (change)="onChange()">
@@ -34,8 +30,7 @@
         <option *ngFor="let level of levels" [value]="level">{{ level | titlecase }}</option>
       </select>
     </div>
-  
-    <!-- Reset button -->
+
     <button class="btn btn-outline-secondary w-100" (click)="resetFilters()">Reset Filters</button>
   </div>
   

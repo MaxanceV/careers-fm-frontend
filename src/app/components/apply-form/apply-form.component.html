@@ -1,13 +1,10 @@
-<!--   APPLY-FORM – STRICT-TEMPLATE SAFE   -->
 <div class="container my-5">
     <h3 class="mb-4"><i class="bi bi-send me-2"></i>Apply to job</h3>
   
     <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
   
-      <!-- 1. Basics -->
       <div class="row g-3">
-  
-        <!-- First name -->
+
         <div class="col-md-6">
           <label class="form-label">First name</label>
           <input class="form-control"
@@ -25,8 +22,7 @@
             </ng-container>
           </div>
         </div>
-  
-        <!-- Last name -->
+
         <div class="col-md-6">
           <label class="form-label">Last name</label>
           <input class="form-control"
@@ -44,8 +40,7 @@
             </ng-container>
           </div>
         </div>
-  
-        <!-- Email -->
+
         <div class="col-md-6">
           <label class="form-label">Email</label>
           <input class="form-control"
@@ -60,8 +55,7 @@
             </ng-container>
           </div>
         </div>
-  
-        <!-- Phone -->
+
         <div class="col-md-6">
           <label class="form-label">Phone</label>
           <input class="form-control"
@@ -77,8 +71,7 @@
           </div>
         </div>
       </div>
-  
-      <!-- 2. Skills -->
+
       <hr class="my-4">
       <h5>Skills</h5>
       <div formArrayName="skills">
@@ -103,16 +96,14 @@
               (click)="addSkill()">
         <i class="bi bi-plus-circle"></i> Add skill
       </button>
-  
-      <!-- 3. Work experience -->
+
       <hr class="my-4">
       <h5>Work experience</h5>
       <div formArrayName="workExperiences"
            *ngFor="let exp of experiences.controls; index as i"
            class="border rounded p-3 mb-3">
         <div [formGroupName]="i" class="row g-2">
-  
-          <!-- Title -->
+
           <div class="col-md-6">
             <label class="form-label">Title</label>
             <input class="form-control"
@@ -122,8 +113,7 @@
               Title is required (≥2 chars).
             </div>
           </div>
-  
-          <!-- Dates -->
+
           <div class="col-md-3">
             <label class="form-label">Start</label>
             <input type="date" class="form-control"
@@ -136,14 +126,12 @@
             <label class="form-label">End</label>
             <input type="date" class="form-control" formControlName="endDate">
           </div>
-  
-          <!-- Description -->
+
           <div class="col-12">
             <label class="form-label">Description</label>
             <textarea rows="2" class="form-control" formControlName="description"></textarea>
           </div>
-  
-          <!-- Range error -->
+
           <div class="text-danger small" *ngIf="exp.errors?.['dateRange']">
             End date must be after start date.
           </div>
@@ -162,8 +150,7 @@
               (click)="addExperience()">
         <i class="bi bi-plus-circle"></i> Add experience
       </button>
-  
-      <!-- 4. Submit -->
+
       <div class="d-grid">
         <button class="btn btn-success btn-lg">
           <i class="bi bi-check2-circle me-1"></i> Submit application

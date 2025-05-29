@@ -13,11 +13,9 @@ import { Job } from '../../data/job';
 })
 export class AddOfferComponent {
 
-  /** reference lists used in the template */
   readonly levels = ['junior', 'mid', 'senior', 'lead'];
   readonly types  = ['full_time', 'part_time', 'freelance', 'internship', 'contract'];
 
-  /** reactive form instance (initialised in the ctor) */
   form!: FormGroup;
 
   constructor(
@@ -26,7 +24,6 @@ export class AddOfferComponent {
     private router: Router
   ) {
 
-    /* ✅ create the form AFTER fb is injected */
     this.form = this.fb.nonNullable.group({
       title:        ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
       company:      ['', [Validators.required, Validators.minLength(3)]],
@@ -40,7 +37,6 @@ export class AddOfferComponent {
     });
   }
 
-  /** convenience accessor for template */
   ctrl(name: string) { return this.form.get(name); }
 
   submit(): void {
@@ -49,7 +45,6 @@ export class AddOfferComponent {
       return;
     }
 
-    /* form.value is now non-nullable → cast is safe */
     const body = this.form.value as unknown as Partial<Job>;
 
     this.jobService.createJob(body).subscribe({

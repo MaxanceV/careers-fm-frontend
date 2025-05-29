@@ -1,22 +1,18 @@
 <div class="card mb-2 shadow-sm" *ngIf="job" style="cursor: pointer;" (click)="goToJobDetail(job)">
     <div class="card-body p-2">
-      <!-- Première ligne : Titre et badge entreprise -->
       <div class="d-flex justify-content-between align-items-center">
         <h5 class="mb-0 text-dark">{{ job.title }}</h5>
         <span class="badge rounded-pill bg-primary">{{ job.company }}</span>
       </div>
-      <!-- Deuxième ligne : Localisation -->
       <div class="mt-1">
         <p class="mb-0 text-muted" style="font-size: 0.9rem;">{{ job.location }}</p>
       </div>
-      <!-- Troisième ligne : Statut Remote -->
       <div class="mt-1">
         <p class="mb-0 text-muted" style="font-size: 0.8rem;">
           {{ job.remote ? 'Remote' : 'On-Site' }}
         </p>
       </div>
     </div>
-    <!-- Footer : Date de publication et bouton de détails -->
     <div class="card-footer p-2 d-flex justify-content-between align-items-center">
       <small class="text-muted">{{ job.createdAt | date:'mediumDate' }}</small>
       <button class="btn btn-sm btn-outline-primary" (click)="goToJobDetail(job); $event.stopPropagation();">
